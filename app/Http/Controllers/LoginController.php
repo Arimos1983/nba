@@ -27,11 +27,15 @@ class LoginController extends Controller
 
         $credentials = request()->only(['email','password']);
 
+        
+
        if(!auth()->attempt($credentials)){
            return redirect()->back()->withErrors([
                'message' => 'Bad credentials. Please ty again!'
            ]);
        }
+       
+       
 
         return redirect('/');
     }

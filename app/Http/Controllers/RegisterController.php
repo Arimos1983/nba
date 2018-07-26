@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\RegistrationConfirmation;
+
 
 class RegisterController extends Controller
 {
@@ -32,8 +35,16 @@ class RegisterController extends Controller
         ]);
 
 
-        auth()->login($user);
+        Mail::to($user)->send(new RegistrationConfirmation($user));
 
-        return redirect('/');
+        return redirect('/login');
+    }
+
+    public function verify($id)
+    {   
+        
+        User::where('id',$id)->update(['is_verified' => 1]);
+
+        return redirect('/login');
     }
 }
