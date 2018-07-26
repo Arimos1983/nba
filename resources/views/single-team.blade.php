@@ -20,6 +20,16 @@
 
     @endforeach
 
+
+</div>
+<div>
+    <h3>Comments:</h3>
+    <ul>
+        @foreach($team->comments as $comment)
+            <li>{{$comment->content}}</li>
+
+        @endforeach
+    </ul>
 </div>
 
 @endsection
