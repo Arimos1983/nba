@@ -7,13 +7,17 @@ use App\User;
 
 class RegisterController extends Controller
 {
-   public function show()
-   {
-       return view('auth.create');
-   }
+    public function __construct()
+    {
+        $this->middleware('guest');
+    }
+    public function show()
+    {
+        return view('auth.create');
+    }
 
-   public function store()
-   {
+    public function store()
+    {
         $this->validate(request(), [
             "name"=>"required",
             "email"=>"required|email|unique:users",
@@ -25,11 +29,11 @@ class RegisterController extends Controller
             'name' => request('name'),
             'email' => request('email'),
             'password' => bcrypt(request('password'))
-       ]);
+        ]);
 
 
-       auth()->login($user);
+        auth()->login($user);
 
-       return redirect('/');
-   }
+        return redirect('/');
+    }
 }

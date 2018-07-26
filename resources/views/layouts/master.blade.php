@@ -17,13 +17,16 @@
   </head>
   <body>
   <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+    @if((auth()->check()))
     <a class="nav-link" href="{{'/'}}">Home</a>
-
+    @else
+    <a class="nav-link" href="{{'/login'}}">Home</a>
+    @endif
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <ul class="navbar-nav mr-auto">
         @if((auth()->check()))
             <li class="nav-item active">
-                <a class="nav-link" href="#">{{auth()->user()->name}}<span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="#">User: {{auth()->user()->name}}<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
                 <a class="nav-link" href="{{'/logout'}}">Logout<span class="sr-only">(current)</span></a>
