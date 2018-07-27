@@ -26,16 +26,25 @@ class LoginController extends Controller
         ]);
 
         $credentials = request()->only(['email','password']);
+        // $credentials['is_verified']=1;
 
-        
+
 
        if(!auth()->attempt($credentials)){
            return redirect()->back()->withErrors([
                'message' => 'Bad credentials. Please ty again!'
            ]);
        }
-       
-       
+
+       if(auth()->user()->is_verified == 0)
+       {
+           auth()->logout();
+           return redirect()->back()->withErrors([
+            'message' => 'Please check your email for verification!'
+        ]);
+       }
+
+
 
         return redirect('/');
     }

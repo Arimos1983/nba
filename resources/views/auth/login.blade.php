@@ -20,6 +20,7 @@
             @include("partials.error-message", ["fieldName" => "password"])
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
+            @include("partials.error-message", ["fieldName" => "message"])
     </form>
 </div>
 

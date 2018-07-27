@@ -8,8 +8,13 @@ use App\Comment;
 
 class CommentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('content', ['only' => 'store']);
+    }
+
     public function store(Team $team)
-    {   
+    {
         $this->validate(request(),[
             'content' => 'required|min:10'
         ]);
